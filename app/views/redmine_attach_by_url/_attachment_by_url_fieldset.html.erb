@@ -1,0 +1,32 @@
+<fieldset id="attachments_by_url_fieldset">
+  <!-- TODO: Add to locale -->
+  <legend>Attachments by url</legend>
+  <div id="attachments_by_url_fields">
+    <div class="attachment_by_url">
+      <span style="display: none;">
+        <%= file_field_tag 'attachments[1][file]', :class => 'file_by_url' %>
+      </span>
+      <%= text_field_tag 'attachments[1][file_url]',
+        'http://img22.ria.ru/images/49138/89/491388913.jpg',
+        :class => "file_url",
+        :placeholder => l(:label_file_url) %>
+      <span class="check"></span>
+      <!-- TODO: Add dwonload to locale -->
+      <%= link_to image_tag('download.png'), "#",
+        :class => "button_download",
+        :title => l(:button_download)
+      <%= text_field_tag 'attachments[1][description]', '', :id => nil,
+        :class => 'description',
+        :placeholder => l(:label_optional_description) %>
+      <%= link_to image_tag('delete.png'), "#",
+        :class => "button_delete",
+        :title => l(:button_delete) %>
+    </div>
+  </div>
+  <div class="add_attachment_by_url">
+    <%= link_to l(:label_add_another_file), '#',
+      :onclick => 'addFileByUrlField(); return false;',
+      :class => 'add_attachment_by_url' %>
+  (<%= l(:label_max_size) %>: <%= number_to_human_size(Setting.attachment_max_size.to_i.kilobytes) %>)
+  </div>
+</fieldset>

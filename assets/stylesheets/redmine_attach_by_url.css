@@ -1,0 +1,12 @@
+#attachments_by_url_fields .file_url {
+  width: 50%;
+}
+
+#attachments_by_url_fields .description {
+  width: 30%;
+}
+
+#attachments_by_url_fields .check {
+  color: red;
+}
+

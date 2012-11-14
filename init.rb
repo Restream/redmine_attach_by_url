@@ -1,5 +1,7 @@
 require 'redmine'
 
+require 'redmine_attach_by_url/hooks'
+
 Redmine::Plugin.register :redmine_attach_by_url do
   name 'Redmine Attach By Url plugin'
   author 'Danil Tashkinov'

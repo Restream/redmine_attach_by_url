@@ -1,0 +1,11 @@
+<%= stylesheet_link_tag 'redmine_attach_by_url', :plugin => :redmine_attach_by_url %>
+<%= javascript_include_tag 'jquery-1.7.2.min.js', :plugin => :redmine_attach_by_url %>
+<%= javascript_include_tag 'redmine_attach_by_url', :plugin => :redmine_attach_by_url %>
+
+<script type="text/javascript">
+  jQuery(document).ready(function($){
+    $('#attachments_fields').closest('.box').append('<%= escape_javascript( \
+        render :partial => "redmine_attach_by_url/attachment_by_url_fieldset") %>');
+  });
+</script>
+
