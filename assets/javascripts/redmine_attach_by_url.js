@@ -1,5 +1,12 @@
 //TODO: add handlers to these classes download, delete, add_attachment_by_url
 
+jQuery(document).ready(function($) {
+  // move attachments_by_url_fieldset into the right place
+  $('#attachments_by_url_fieldset').appendTo(
+    $('#attachments_fields').closest('.box')
+  );
+});
+
 function bindHandlersToFileUrl(el) {
   el.observe("change", function() {
     // TODO: check url regexp or change to standard one
