@@ -3,20 +3,21 @@
 <%= javascript_include_tag 'jquery-noconflict.js', :plugin => :redmine_attach_by_url %>
 <%= javascript_include_tag 'redmine_attach_by_url', :plugin => :redmine_attach_by_url %>
 
-<fieldset id="attachments_by_url_fieldset">
+<fieldset id="attachments-by-url-fieldset">
   <!-- TODO: Add to locale -->
   <legend>Attachments by url</legend>
-  <div id="attachments_by_url_fields">
-    <div class="attachment_by_url">
+  <div id="attachments-by-url">
+    <div class="attachment-by-url">
       <span style="display: none;">
         <%= file_field_tag 'attachments[1][file]', :class => 'file_by_url' %>
       </span>
       <%= text_field_tag 'attachments[1][file_url]',
         'http://img22.ria.ru/images/49138/89/491388913.jpg',
-        :class => "file_url",
+        :class => "file-url",
         :placeholder => l(:label_file_url) %>
-      <span class="check"></span>
-      <!-- TODO: Add dwonload to locale -->
+      <!-- TODO: Add to locale -->
+      <span class="bad-url-text">Check the url!</span>
+      <!-- TODO: Add to locale -->
       <%= link_to image_tag('download.png'), "#",
         :class => "button_download",
         :title => l(:button_download) %>
@@ -28,10 +29,10 @@
         :title => l(:button_delete) %>
     </div>
   </div>
-  <div class="add_attachment_by_url">
+  <div class="add_attachment-by-url">
     <%= link_to l(:label_add_another_file), '#',
       :onclick => 'addFileByUrlField(); return false;',
-      :class => 'add_attachment_by_url' %>
+      :class => 'add_attachment-by-url' %>
   (<%= l(:label_max_size) %>: <%= number_to_human_size(Setting.attachment_max_size.to_i.kilobytes) %>)
   </div>
 </fieldset>

@@ -1,37 +1,29 @@
-//TODO: add handlers to these classes download, delete, add_attachment_by_url
+//TODO: add handlers to these classes download, delete, add_attachment-by-url
 
 jQuery(document).ready(function($) {
-  // move attachments_by_url_fieldset into the right place
-  $('#attachments_by_url_fieldset').appendTo(
-    $('#attachments_fields').closest('.box')
-  );
-});
+  // move attachments-by-url-fieldset into the right place
+  $('#attachments-by-url-fieldset')
+    .appendTo($('#attachments_fields').closest('.box'));
 
-function bindHandlersToFileUrl(el) {
-  el.observe("change", function() {
-    // TODO: check url regexp or change to standard one
-    var regUrl = /^(https?:\/\/)([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?[\?]?(\w+=[^&]*&?)*$/
-    var isBadUrl = this.value == "" || regUrl.test(this.value);
-
-    this.next('span.check').textContent = isBadUrl ? "" : "bad url";
-  });
-}
-
-Event.observe(document, "dom:loaded", function() {
-  $("attachments_by_url_fields").select("input.file_url").each(function(el) {
-    bindHandlersToFileUrl(el);
-  });
+  // add check url handler
+  $('#attachments-by-url')
+    .on("keyup change click", ".attachment-by-url input.file-url", function(evt) {
+      setTimeout
+      var regUrl = /^(https?:\/\/)([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?[\?]?(\w+=[^&]*&?)*$/
+      var isBadUrl =  !(this.value == "" || regUrl.test(this.value));
+      $(this).closest('.attachment-by-url').toggleClass('bad-url', isBadUrl);
+    });
 });
 
 function addFileByUrlField(blob) {
-  var fields = $('attachments_by_url_fields');
+  var fields = $('attachments-by-url_fields');
   if (fields.childElements().length >= 10) return false;
   fileFieldCount++;
   var s = new Element('div');
   s.update(fields.down('div').innerHTML);
 
-  var fileUrl = s.down('input.file_url');
-  fileUrl.name = "attachments[" + fileFieldCount + "][file_url]";
+  var fileUrl = s.down('input.file-url');
+  fileUrl.name = "attachments[" + fileFieldCount + "][file-url]";
   fileUrl.value = "";
   bindHandlerToFileUrlChange(fileUrl);
 

@@ -1,12 +1,16 @@
-#attachments_by_url_fields .file_url {
+.attachment-by-url .file-url {
   width: 50%;
 }
 
-#attachments_by_url_fields .description {
+.attachment-by-url .description {
   width: 30%;
 }
 
-#attachments_by_url_fields .check {
+.attachment-by-url .bad-url-text {
+  display: none;
   color: red;
 }
 
+.attachment-by-url.bad-url .bad-url-text {
+  display: inline;
+}
