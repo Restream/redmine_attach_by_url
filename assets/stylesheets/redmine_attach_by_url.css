@@ -14,3 +14,19 @@
 .attachment-by-url.bad-url .bad-url-text {
   display: inline;
 }
+
+.attachment-by-url.bad-url .button-download {
+  display: none;
+}
+
+.attachment-by-url progress {
+  width: 50%;
+}
+
+.attachment-by-url .download-progress-block {
+  display: none;
+}
+
+.attachment-by-url .done-block {
+  display: none;
+}

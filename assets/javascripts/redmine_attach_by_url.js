@@ -12,7 +12,7 @@ jQuery(document).ready(function($) {
     });
 
   // add new attachment handler
-  $(".add-attachment-by-url").on("click", function(evt) {
+  $("#attachments-by-url-fieldset a.add_attachment").on("click", function(evt) {
     evt.stopPropagation();
     if ($('.attachment-by-url').length >= 10) return false;
     fileFieldCount++;
@@ -34,6 +34,63 @@ jQuery(document).ready(function($) {
     }
     return false;
   });
+
+  // download attachment handler
+  $('#attachments-by-url').on("click", ".button-download", function(evt) {
+    evt.stopPropagation();
+
+    var attach = $(this).closest('.attachment-by-url');
+    var xhr = new XMLHttpRequest();
+    var url = attach.find('input.file-url').val();
+    // var url = 'http://img22.ria.ru/images/91049/95/910499535.jpg';
+
+    if(xhr) {
+
+      // attach.find('.input-file-url-block').hide();
+      // attach.find('.download-progress-block').show();
+
+      xhr.open('GET', url, true);
+      xhr.responseType = "blob";
+
+      // var eventSource = xhr.upload || xhr;
+      // var progressBar = attach.find('progress');
+
+      // eventSource.addEventListener("progress", function(e) {
+      //     // normalize position attributes across XMLHttpRequest versions and browsers
+      //     var position = e.position || e.loaded;
+      //     var total = e.totalSize || e.total;
+
+      //     progressBar.attr("max", total);
+      //     progressBar.attr("value", position);
+      // });
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == xhr.DONE) {
+          var img = document.createElement('img');
+          var urlApi = window.webkitURL ? webkitURL : URL;
+          img.onload = function(e) {
+            urlApi.revokeObjectURL(img.src); // Clean up after yourself.
+          };
+          var blob = xhr.reponse;
+          var fd = FormData(attach.closest('form')[0]);
+          fd.append('attachments[10][file]', blob);
+          // img.src = urlApi.createObjectURL(xblob);
+          // var fields = $('attachments_fields');
+          // attach.appendChild(img);
+
+          // attach.find('.download-progress-block').hide();
+          // attach.find('.done-block').show();
+        }
+      };
+
+      xhr.send();
+    }
+
+    return false;
+  });
+
+
+
 });
 
 function downloadByUrl(el) {
