@@ -1,2 +1,3 @@
 en:
   label_file_url: "Enter file url you want to attach."
+  label_file_name: "Enter file name for file"

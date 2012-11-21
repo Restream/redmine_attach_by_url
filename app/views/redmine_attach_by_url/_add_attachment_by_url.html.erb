@@ -1,6 +1,10 @@
 <%= stylesheet_link_tag 'redmine_attach_by_url', :plugin => :redmine_attach_by_url %>
-<%= javascript_include_tag 'jquery-1.7.2.min.js', :plugin => :redmine_attach_by_url %>
-<%= javascript_include_tag 'jquery-noconflict.js', :plugin => :redmine_attach_by_url %>
+<script type="text/javascript">
+  if(typeof(jQuery) == 'undefined') {
+    document.write("<%= escape_javascript(javascript_include_tag('jquery-1.7.2.min.js', :plugin => 'redmine_attach_by_url')) %>");
+    document.write("<%= escape_javascript(javascript_include_tag('jquery-noconflict.js', :plugin => 'redmine_attach_by_url')) %>");
+  }
+</script>
 <%= javascript_include_tag 'redmine_attach_by_url', :plugin => :redmine_attach_by_url %>
 
 <fieldset id="attachments-by-url-fieldset">
@@ -8,38 +12,22 @@
   <legend>Attachments by url</legend>
   <div id="attachments-by-url">
     <div class="attachment-by-url">
-      <span style="display: none;">
-        <%= file_field_tag 'attachments[1][file]', :class => 'file-by-url' %>
-      </span>
-      <span class="input-file-url-block">
-        <%= text_field_tag 'attachments[1][file_url]',
-          'http://img22.ria.ru/images/49138/89/491388913.jpg',
-          :class => "file-url",
-          :placeholder => l(:label_file_url) %>
-        <!-- TODO: Add to locale -->
-        <span class="bad-url-text">Check the url!</span>
-        <!-- TODO: Add to locale -->
-        <%= link_to image_tag('world_add.png', :plugin => "redmine_attach_by_url"), "#",
-          :class => "button-download",
-          :title => l(:button_download) %>
-        <%= link_to image_tag('delete.png'), "#",
-          :class => "button-delete",
-          :title => l(:button_delete) %>
-      </span>
-      <span class="download-progress-block">
-        <progress value="35" max="100"></progress>
-        <%= link_to image_tag('cancel.png'), "#",
-          :class => "button-cancel",
-          :title => l(:button_cancel) %>
-      </span>
-      <span class="done-block">
-        <%= text_field_tag 'attachments[1][description]', '', :id => nil,
-          :class => 'description',
-          :placeholder => l(:label_optional_description) %>
-        <%= link_to image_tag('delete.png'), "#",
-          :class => "button-delete",
-          :title => l(:button_delete) %>
-      </span>
+      <%= text_field_tag 'attachments_by_url[1][file_url]',
+        'http://img22.ria.ru/images/49138/89/491388913.jpg',
+        :class => "file-url",
+        :placeholder => l(:label_file_url) %>
+      <%= text_field_tag 'attachments_by_url[1][file_name]',
+        '491388913.jpg',
+        :class => "file-name",
+        :placeholder => l(:label_file_name) %>
+      <!-- TODO: Add to locale -->
+      <span class="bad-url-text">Check the url!</span>
+      <%= text_field_tag 'attachments_by_url[1][description]', '', :id => nil,
+        :class => 'description',
+        :placeholder => l(:label_optional_description) %>
+      <%= link_to image_tag('delete.png'), "#",
+        :class => "button-delete",
+        :title => l(:button_delete) %>
     </div>
   </div>
   <span class="add_attachment">

@@ -1,6 +1,10 @@
 require 'redmine'
 
 require 'redmine_attach_by_url/hooks'
+require 'redmine_attach_by_url/view_hooks'
+
+require 'delayed_job'
+Delayed::Worker.backend = :active_record
 
 Redmine::Plugin.register :redmine_attach_by_url do
   name 'Redmine Attach By Url plugin'
