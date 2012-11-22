@@ -21,7 +21,7 @@ jQuery(document).ready(function($) {
     newAttach.find('input.file-name').val('').change();
     newAttach.find('input.description').val('');
     newAttach.find('input.file-url').attr("name",
-      "attachments_by_url[" + fileFieldCount + "][file-url]");
+      "attachments_by_url[" + fileFieldCount + "][url]");
     newAttach.find('input.file-name').attr("name",
       "attachments_by_url[" + fileFieldCount + "][file-name]");
     newAttach.find('input.description').attr("name",

@@ -10,12 +10,17 @@ module AttachByUrl
     end
 
     def controller_issues_edit_after_save(context)
-      issue_id = context.issue.id
-      author_id = User.current.id
-      attachments_urls = context.params[:attachments_urls]
-      attachments_urls.each do |attachment_url|
+      issue = context[:issue]
+      author = User.current
+      attachments_urls = context[:params][:attachments_by_url]
+      attachments_urls.values.each do |attachment_url|
         Delayed::Job.enqueue(
-          RedmineAttachByUrl::Downloader.new(attachment_url, issue_id, author_id))
+          RedmineAttachByUrl::Downloader.new(
+              attachment_url['url'],
+              attachment_url['file_name'],
+              attachment_url['description'],
+              issue.id, author.id)
+        )
       end
     end
   end
