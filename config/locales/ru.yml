@@ -1,0 +1,7 @@
+en:
+  label_file_url: "Введите ссылку для загрузки"
+  label_attachments_by_url : "Файлы по URL"
+
+  message_check_url: "Проверьте URL!"
+  message_download_success: "Загрузка %{url} завершена."
+  message_download_failed: "Не удалось загрузить %{url}"

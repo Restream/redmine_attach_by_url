@@ -1,4 +1,4 @@
-<%= stylesheet_link_tag 'redmine_attach_by_url', :plugin => :redmine_attach_by_url %>
+<%= stylesheet_link_tag 'redmine_attach_by_url', :plugin => 'redmine_attach_by_url' %>
 <script type="text/javascript">
   if(typeof(jQuery) == 'undefined') {
     document.write("<%= escape_javascript(
@@ -7,19 +7,16 @@
         javascript_include_tag('jquery-noconflict.js', :plugin => 'redmine_attach_by_url')) %>");
   }
 </script>
-<%= javascript_include_tag 'redmine_attach_by_url', :plugin => :redmine_attach_by_url %>
+<%= javascript_include_tag 'redmine_attach_by_url', :plugin => 'redmine_attach_by_url' %>
 
 <fieldset id="attachments-by-url-fieldset">
-  <!-- TODO: Add to locale -->
-  <legend>Attachments by url</legend>
+  <legend><%= l(:label_attachments_by_url) %></legend>
   <div id="attachments-by-url">
     <div class="attachment-by-url">
-      <%= text_field_tag 'attachments_by_url[1][url]',
-        'http://img22.ria.ru/images/49138/89/491388913.jpg',
+      <span class="bad-url-text"><%= l(:message_check_url) %></span>
+      <%= text_field_tag 'attachments_by_url[1][url]', '',
         :class => "file-url",
         :placeholder => l(:label_file_url) %>
-      <!-- TODO: Add to locale -->
-      <span class="bad-url-text">Check the url!</span>
       <%= text_field_tag 'attachments_by_url[1][description]', '', :id => nil,
         :class => 'description',
         :placeholder => l(:label_optional_description) %>

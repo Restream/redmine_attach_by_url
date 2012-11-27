@@ -12,5 +12,5 @@
 }
 
 .attachment-by-url.bad-url .bad-url-text {
-  display: inline;
+  display: block;
 }

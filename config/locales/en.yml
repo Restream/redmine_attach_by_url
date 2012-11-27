@@ -1,3 +1,7 @@
 en:
   label_file_url: "Enter file url you want to attach."
-  label_file_name: "Enter file name for file"
+  label_attachments_by_url : "Attachments by url"
+
+  message_check_url: "Check the url!"
+  message_download_success: "Downloading from %{url} complete."
+  message_download_failed: "Downloading from %{url} failed."

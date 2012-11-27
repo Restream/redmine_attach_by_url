@@ -16,6 +16,7 @@ module RedmineAttachByUrl
     def perform
       issue = Issue.find(issue_id)
       author = User.find(author_id)
+      journal = issue.init_journal(author)
       begin
         self.class.validate_url!(url)
         file = download_attachment
@@ -25,20 +26,21 @@ module RedmineAttachByUrl
             'description' => description
           }
           issue.save_attachments [attachment], author
-          journal = issue.init_journal(author, "Downloading file from #{url} ")
           if issue.unsaved_attachments.any?
             issue.unsaved_attachments.each do |attach|
-              journal.notes += " Error: #{attach.errors.full_messages.join(", ")}"
+              raise attach.errors.full_messages.join(", ")
             end
           else
-            journal.notes += "Downloading file #{file_name} from #{url} complete."
+            journal.notes = I18n.t(:message_download_success, :url => url)
           end
-          issue.save
+          issue.save!
         ensure
           file.close
         end
       rescue RuntimeError => e
-        issue.init_journal(author, "failed. #{e.message}")
+        Rails.logger.error "Download from '#{url}' failed with: #{e.inspect}"
+        journal.notes = I18n.t(:message_download_failed, :url => url)
+        issue.save!
       end
     end
 
@@ -63,10 +65,8 @@ module RedmineAttachByUrl
           private_re = /(^0\.0\.0\.0)|(^127\.0\.0\.1)|(^10\.)|(^172\.1[6-9]\.)|(^172\.2[0-9]\.)|(^172\.3[0-1]\.)|(^192\.168\.)/
           raise "deny private networks" if private_re =~ uri.host
         end
-      rescue RuntimeError => e
-        logger.error "RedmineAttachByUrl::validate_url!('#{url}') failed with message: #{e.message}"
-        raise URI::InvalidURIError, "bad URI(is not URI?): #{url}"
       end
+
     end
 
     private
