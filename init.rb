@@ -5,6 +5,8 @@ require 'redmine_attach_by_url/view_hooks'
 
 require 'delayed_job'
 Delayed::Worker.backend = :active_record
+Delayed::Worker.max_attempts = 1
+Delayed::Worker.max_run_time = 10.minutes
 
 Redmine::Plugin.register :redmine_attach_by_url do
   name 'Redmine Attach By Url plugin'

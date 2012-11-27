@@ -1,9 +1,9 @@
 .attachment-by-url .file-url {
-
+  width: 50%;
 }
 
 .attachment-by-url .description {
-
+  width: 340px;
 }
 
 .attachment-by-url .bad-url-text {

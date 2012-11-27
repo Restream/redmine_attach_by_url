@@ -18,12 +18,9 @@ jQuery(document).ready(function($) {
     fileFieldCount++;
     var newAttach = $('.attachment-by-url').last().clone();
     newAttach.find('input.file-url').val('').change();
-    newAttach.find('input.file-name').val('').change();
     newAttach.find('input.description').val('');
     newAttach.find('input.file-url').attr("name",
       "attachments_by_url[" + fileFieldCount + "][url]");
-    newAttach.find('input.file-name').attr("name",
-      "attachments_by_url[" + fileFieldCount + "][file-name]");
     newAttach.find('input.description').attr("name",
       "attachments_by_url[" + fileFieldCount + "][description]");
     newAttach.appendTo($('#attachments-by-url'));
