@@ -24,19 +24,37 @@
   display: none;
 }
 
-/* downloading in progress */
+/* downloading queued */
 
-.attachment-by-url.in-progress .state-text {
-  display: block;
+.attachment-by-url.queued .state-text {
+  color: #000000;
+  display: inline;
 }
-.attachment-by-url.in-progress .button-cancel {
+.attachment-by-url.queued .button-cancel {
   display: inline;
 }
 
-.attachment-by-url.in-progress .file-url,
-.attachment-by-url.in-progress .button-attachment-download,
-.attachment-by-url.in-progress .button-delete,
-.attachment-by-url.in-progress .description {
+.attachment-by-url.queued .file-url,
+.attachment-by-url.queued .button-attachment-download,
+.attachment-by-url.queued .button-delete,
+.attachment-by-url.queued .description {
+  display: none;
+}
+
+/* downloading in progress */
+
+.attachment-by-url.in_progress .state-text {
+  color: #000000;
+  display: inline;
+}
+.attachment-by-url.in_progress .button-cancel {
+  display: inline;
+}
+
+.attachment-by-url.in_progress .file-url,
+.attachment-by-url.in_progress .button-attachment-download,
+.attachment-by-url.in_progress .button-delete,
+.attachment-by-url.in_progress .description {
   display: none;
 }
 

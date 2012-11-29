@@ -4,6 +4,14 @@ en:
 
   message_download_success: "Downloading from %{url} complete."
   message_download_failed: "Downloading from %{url} failed."
+  message_invalid_url: "Invalid URL! Example of valid url: http(s)://example.com/file.png"
 
   button_attachment_download: "Download"
   button_attachment_cancel: "Cancel download"
+
+  message_attachment_by_url_state:
+    queued: "Download will starts shortly."
+    in_progress: "Downloading in progress..."
+    canceled: "Downloading was cancelled."
+    completed: "Downloading completed successfully."
+    failed: "Downloading failed."

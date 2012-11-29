@@ -14,8 +14,9 @@ jQuery(document).ready(function($) {
   }
 
   function changeAttachByUrlState(attach, newState) {
-    var newClass = cleanArray([".attachment-by-url.", newState]).join(".");
-    $(attach).css("class", newClass)
+    var newClass = cleanArray(["attachment-by-url", newState]).join(" ");
+    $(attach).removeClass();
+    $(attach).addClass(newClass);
   }
 
   // add new attachment handler
@@ -50,18 +51,35 @@ jQuery(document).ready(function($) {
     return false;
   });
 
-  // start download attchment
+  // start download attachment
   $('#attachments-by-url').on("click", ".attachment-by-url .button-attachment-download", function(evt) {
 
     evt.stopPropagation();
-    changeAttachByUrlState($(this).closest('.attachment-by-url'), "in-progress");
 
-    // TODO: call attchments_by_url#create
+    var attach = $(this).closest('.attachment-by-url');
+    var attach_url = attach.find('input.file-url').val();
+
+    $.ajax({
+      url: '/attachments_by_url',
+      dataType: 'json',
+      type: 'POST',
+      data: { attachment_by_url: { url: attach_url } },
+      success: function(data, textStatus, jqXHR) {
+        attach.find("input.id").val(data["id"]);
+        attach.find(".state-text").text(data["state_text"]);
+        // TODO: draw progress-bar
+        changeAttachByUrlState(attach, data["state"]);
+      },
+      error: function(data, textStatus, jqXHR) {
+        attach.find(".state-text").text(textStatus);
+        changeAttachByUrlState(attach, "failed");
+      }
+    });
 
     return false;
   });
 
-  // cancel download attchment
+  // cancel download attachment
   $('#attachments-by-url').on("click", ".attachment-by-url.in-progress .button-cancel", function(evt) {
 
     evt.stopPropagation();

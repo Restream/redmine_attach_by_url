@@ -4,6 +4,14 @@ ru:
 
   message_download_success: "Загрузка %{url} завершена."
   message_download_failed: "Не удалось загрузить %{url}"
+  message_invalid_url: "Ошибка в URL! Пример правильного URL: http(s)://example.com/file.png"
 
   button_attachment_download: "Загрузить"
   button_attachment_cancel: "Отменить загрузку"
+
+  message_attachment_by_url_state:
+    queued: "Download will starts shortly."
+    in_progress: "Downloading in progress..."
+    canceled: "Downloading was cancelled."
+    completed: "Downloading completed successfully."
+    failed: "Downloading failed."
