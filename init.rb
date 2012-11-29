@@ -1,5 +1,6 @@
 require 'redmine'
 
+require 'redmine_attach_by_url/inflections'
 require 'redmine_attach_by_url/hooks'
 require 'redmine_attach_by_url/view_hooks'
 
