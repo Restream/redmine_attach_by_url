@@ -22,7 +22,7 @@
   color: #084f08;
 }
 
-.attachment-by-url.progress {
+.attachment-by-url .progress {
   display: none;
   background-color: white;
   height: 3px;
@@ -31,7 +31,7 @@
   width: 300px;
 }
 
-.attachment-by-url.progress-line {
+.attachment-by-url .progress-line {
   background-color: green;
   height: 3px;
   margin: 0;

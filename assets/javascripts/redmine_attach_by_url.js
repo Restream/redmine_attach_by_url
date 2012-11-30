@@ -38,7 +38,7 @@ jQuery(document).ready(function($) {
       default:
         $(attach).find('.state-text,.button-cancel,.progress').hide();
         $(attach).find('.button-delete,.button-attachment-download').show();
-        $(attach).find('.file-url').attr("disabled", "disabled");
+        $(attach).find('.file-url').removeAttr("disabled");
     }
   }
 
@@ -73,7 +73,7 @@ jQuery(document).ready(function($) {
         // draw progress-line
         if (data["complete_bytes"] && data["total_bytes"]) {
           var w = (data["complete_bytes"] / data["total_bytes"]) * 100;
-          attach.find("progress-line").css("width", w + "px");
+          attach.find(".progress-line").css("width", w + "%");
         }
 
         changeAttachByUrlState(attach, data["state"]);
@@ -83,13 +83,6 @@ jQuery(document).ready(function($) {
         changeAttachByUrlState(attach, "failed");
       }
     });
-  }
-
-  function startCheckingAttachByUrlState(attach) {
-    var currentState = $(attach).find('input.state')
-    if (/queued|in_progress/.test(data["state"])) {
-      setTimeout(checkAttachmentState(attach), 500);
-    }
   }
 
   // add new attachment handler
@@ -109,7 +102,7 @@ jQuery(document).ready(function($) {
     newAttach.find('input.description').attr("name",
       "attachments_by_url[" + fileFieldCount + "][description]");
 
-    changeAttachByUrlState(newAttach, "ready");
+    changeAttachByUrlState(newAttach, null);
 
     newAttach.appendTo($('#attachments-by-url'));
     return false;
@@ -175,10 +168,6 @@ jQuery(document).ready(function($) {
         changeAttachByUrlState(attach, "failed");
       }
     });
-
-    // changeAttachByUrlState($(this).closest('attach.attachment-by-url'), null);
-
-    // TODO: call attchments_by_url#cancel
 
     return false;
   });

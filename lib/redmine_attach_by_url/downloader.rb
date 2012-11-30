@@ -29,6 +29,8 @@ module RedmineAttachByUrl
           attach.save! if Time.now - attach.updated_at > UPDATE_INTERVAL
         }
       )
+      file.extend OriginalFilename
+      file.original_filename = guess_file_name(file.content_type)
       a = Attachment.create(:file => file, :author => attach.author)
       if (a.new_record?)
         attach.state = AttachmentByUrl::FAILED
@@ -44,37 +46,6 @@ module RedmineAttachByUrl
       attach.save!
     end
 
-    def perform2
-      issue = Issue.find(issue_id)
-      author = User.find(author_id)
-      journal = issue.init_journal(author)
-      begin
-        self.class.validate_url!(url)
-        file = download_attachment
-        begin
-          attachment = {
-            'file' => file,
-            'description' => description
-          }
-          issue.save_attachments [attachment], author
-          if issue.unsaved_attachments.any?
-            issue.unsaved_attachments.each do |attach|
-              raise attach.errors.full_messages.join(", ")
-            end
-          else
-            journal.notes = I18n.t(:message_download_success, :url => url)
-          end
-          issue.save!
-        ensure
-          file.close
-        end
-      rescue RuntimeError => e
-        Rails.logger.error "Download from '#{url}' failed with: #{e.inspect}"
-        journal.notes = I18n.t(:message_download_failed, :url => url)
-        issue.save!
-      end
-    end
-
     class << self
       def download(attachment_by_url_id)
         new(attachment_by_url_id).download
@@ -88,18 +59,10 @@ module RedmineAttachByUrl
     end
 
     def guess_file_name(content_type)
-      uri = URI.parse(url)
+      uri = URI.parse(attach.url)
       base_name = (m = /\/?([^\/]+)$/.match(uri.path)) ? m[1] : "noname"
       /\./ =~ base_name ? base_name : "#{base_name}.#{guess_extension(content_type)}"
     end
 
-    def download_attachment(&block)
-      uri = URI.parse(url)
-      response = uri.open
-      response.extend OriginalFilename
-      response.original_filename =
-          file_name.blank? ? guess_file_name(response.content_type) : file_name
-      response
-    end
   end
 end
