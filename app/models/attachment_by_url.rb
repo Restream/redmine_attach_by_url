@@ -2,7 +2,7 @@ class AttachmentByUrl < ActiveRecord::Base
   unloadable
 
   QUEUED = "queued"
-  IN_PROGRESS = "in-progress"
+  IN_PROGRESS = "in_progress"
   CANCELED = "canceled"
   COMPLETED = "completed"
   FAILED = "failed"
@@ -37,5 +37,10 @@ class AttachmentByUrl < ActiveRecord::Base
     errors.add(:url, I18n.t(:message_invalid_url))
   rescue
     errors.add(:url, I18n.t(:message_url_is_not_safe))
+  end
+
+  def author
+    # TODO: fix it
+    User.last
   end
 end

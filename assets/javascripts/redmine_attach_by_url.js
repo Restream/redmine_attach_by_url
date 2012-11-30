@@ -13,10 +13,83 @@ jQuery(document).ready(function($) {
     return newArray;
   }
 
+  function manageVisibilityByState(attach, state) {
+    switch(state) {
+      case "in_progress":
+        $(attach).find('.button-delete,.button-attachment-download').hide();
+        $(attach).find('.state-text,.button-cancel,.progress').show();
+        $(attach).find('.file-url').attr("disabled", "disabled");
+        break;
+      case "queued":
+        $(attach).find('.button-delete,.button-attachment-download,.progress').hide();
+        $(attach).find('.state-text,.button-cancel').show();
+        $(attach).find('.file-url').attr("disabled", "disabled");
+        break;
+      case "completed":
+        $(attach).find('.button-attachment-download,.button-cancel,.progress').hide();
+        $(attach).find('.button-delete,.state-text').show();
+        $(attach).find('.file-url').attr("disabled", "disabled");
+        break;
+      case "failed":
+        $(attach).find('.button-cancel').hide();
+        $(attach).find('.state-text,.button-delete,.button-attachment-download,.progress').show();
+        $(attach).find('.file-url').removeAttr("disabled");
+        break;
+      default:
+        $(attach).find('.state-text,.button-cancel,.progress').hide();
+        $(attach).find('.button-delete,.button-attachment-download').show();
+        $(attach).find('.file-url').attr("disabled", "disabled");
+    }
+  }
+
   function changeAttachByUrlState(attach, newState) {
     var newClass = cleanArray(["attachment-by-url", newState]).join(" ");
     $(attach).removeClass();
     $(attach).addClass(newClass);
+
+    manageVisibilityByState(attach, newState);
+
+    // continuously check the state every 500ms
+    if (/queued|in_progress/.test(newState)) {
+      setTimeout(function() {
+        checkAttachmentState(attach);
+      }, 500);
+    }
+  }
+
+  function checkAttachmentState(attach) {
+    var attach_id = attach.find('input.id').val();
+
+    $.ajax({
+      url: '/attachments_by_url/' + attach_id + '/state',
+      dataType: 'json',
+      type: 'GET',
+      data: { attachment_by_url: { id: attach_id } },
+      success: function(data, textStatus, jqXHR) {
+        attach.find("input.id").val(data["id"]);
+        attach.find(".state-text").text(data["state_text"]);
+        attach.data(data);
+
+        // draw progress-line
+        if (data["complete_bytes"] && data["total_bytes"]) {
+          var w = (data["complete_bytes"] / data["total_bytes"]) * 100;
+          attach.find("progress-line").css("width", w + "px");
+        }
+
+        changeAttachByUrlState(attach, data["state"]);
+      },
+      error: function(data, textStatus, jqXHR) {
+        attach.find(".state-text").text(textStatus);
+        changeAttachByUrlState(attach, "failed");
+      }
+    });
+  }
+
+  function startCheckingAttachByUrlState(attach) {
+    var currentState = $(attach).find('input.state')
+    if (/queued|in_progress/.test(data["state"])) {
+      setTimeout(checkAttachmentState(attach), 500);
+    }
   }
 
   // add new attachment handler
@@ -80,10 +153,30 @@ jQuery(document).ready(function($) {
   });
 
   // cancel download attachment
-  $('#attachments-by-url').on("click", ".attachment-by-url.in-progress .button-cancel", function(evt) {
+  $('#attachments-by-url').on("click", ".attachment-by-url .button-cancel", function(evt) {
 
     evt.stopPropagation();
-    changeAttachByUrlState($(this).closest('.attachment-by-url'), null);
+
+    var attach = $(this).closest('.attachment-by-url');
+    var attach_id = attach.find('input.id').val();
+
+    $.ajax({
+      url: '/attachments_by_url/' + attach_id,
+      dataType: 'json',
+      type: 'DELETE',
+      data: { attachment_by_url: { id: attach_id } },
+      success: function(data, textStatus, jqXHR) {
+        attach.find("input.id").val(data["id"]);
+        attach.find(".state-text").text(data["state_text"]);
+        changeAttachByUrlState(attach, data["state"]);
+      },
+      error: function(data, textStatus, jqXHR) {
+        attach.find(".state-text").text(textStatus);
+        changeAttachByUrlState(attach, "failed");
+      }
+    });
+
+    // changeAttachByUrlState($(this).closest('attach.attachment-by-url'), null);
 
     // TODO: call attchments_by_url#cancel
 

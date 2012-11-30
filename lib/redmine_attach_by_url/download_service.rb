@@ -5,7 +5,7 @@ module RedmineAttachByUrl
         attach = AttachmentByUrl.new(:url => url,
                                      :state => AttachmentByUrl::QUEUED)
         attach.save
-        # enqueue attach download
+        RedmineAttachByUrl::Downloader.delay.download(attach.id)
         attach
       end
 

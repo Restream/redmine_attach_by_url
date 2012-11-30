@@ -6,14 +6,45 @@ module RedmineAttachByUrl
   end
 
   class Downloader
-    attr_reader :url, :file_name, :description, :issue_id, :author_id
+    attr_reader :attach
 
-    def initialize(url, file_name, description, issue_id, author_id)
-      @url, @file_name, @description, @issue_id, @author_id =
-        url, file_name, description, issue_id, author_id
+    # update state every X seconds
+    UPDATE_INTERVAL = 1
+
+    def initialize(attachment_by_url_id)
+      @attach = AttachmentByUrl.find(attachment_by_url_id)
     end
 
-    def perform
+    def download
+      return unless attach && attach.state == AttachmentByUrl::QUEUED
+      attach.state = AttachmentByUrl::IN_PROGRESS
+      attach.save!
+      uri = URI.parse(attach.url)
+      file = uri.open(
+        :content_length_proc => lambda { |total|
+          attach.total_bytes = total
+        },
+        :progress_proc => lambda { |downloaded_bytes|
+          attach.complete_bytes = downloaded_bytes
+          attach.save! if Time.now - attach.updated_at > UPDATE_INTERVAL
+        }
+      )
+      a = Attachment.create(:file => file, :author => attach.author)
+      if (a.new_record?)
+        attach.state = AttachmentByUrl::FAILED
+        attach.state_text = a.errors.full_messages.join("; ")
+      else
+        attach.state = AttachmentByUrl::COMPLETED
+      end
+
+      attach.save! if attach.changed?
+    rescue OpenURI::HTTPError => http_error
+      attach.state = AttachmentByUrl::FAILED
+      attach.state_text = http_error.message
+      attach.save!
+    end
+
+    def perform2
       issue = Issue.find(issue_id)
       author = User.find(author_id)
       journal = issue.init_journal(author)
@@ -45,28 +76,9 @@ module RedmineAttachByUrl
     end
 
     class << self
-
-      def perform(url, file_name, description, issue_id, author_id)
-        new(url, file_name, description, issue_id, author_id).perform
+      def download(attachment_by_url_id)
+        new(attachment_by_url_id).download
       end
-
-      def validate_url!(url)
-        # uri valid?
-        uri = URI.parse(url)
-
-        # allow only http and https
-        raise "allow only http and https" unless /^https?$/ =~ uri.scheme
-
-        # deny localhost
-        raise "deny localhost" if /^localhost?$/ =~ uri.host
-
-        # deny private networks
-        if Regexp.new(uri.parser.pattern[:IPV4ADDR]) =~ uri.host
-          private_re = /(^0\.0\.0\.0)|(^127\.0\.0\.1)|(^10\.)|(^172\.1[6-9]\.)|(^172\.2[0-9]\.)|(^172\.3[0-1]\.)|(^192\.168\.)/
-          raise "deny private networks" if private_re =~ uri.host
-        end
-      end
-
     end
 
     private

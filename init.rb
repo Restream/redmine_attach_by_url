@@ -5,7 +5,6 @@ require 'redmine_attach_by_url/hooks'
 require 'redmine_attach_by_url/view_hooks'
 require 'redmine_attach_by_url/attachment_by_url_presenter'
 
-
 require 'delayed_job'
 Delayed::Worker.backend = :active_record
 Delayed::Worker.max_attempts = 1

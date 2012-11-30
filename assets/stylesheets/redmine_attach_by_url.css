@@ -1,90 +1,40 @@
 .attachment-by-url .state-text {
-  color: #8b0000;
+  display: block;
+}
+
+.attachment-by-url .button-cancel {
+  display: none;
 }
 
 .attachment-by-url .file-url {
-  width: 50%;
+  width: 300px;
 }
 
 .attachment-by-url .description {
   width: 340px;
 }
 
-/* ready for download */
-
-.attachment-by-url .file-url,
-.attachment-by-url .button-attachment-download,
-.attachment-by-url .button-delete {
-  display: inline;
-}
-
-.attachment-by-url .state-text,
-.attachment-by-url .button-cancel,
-.attachment-by-url .description {
-  display: none;
-}
-
-/* downloading queued */
-
-.attachment-by-url.queued .state-text {
-  color: #000000;
-  display: inline;
-}
-.attachment-by-url.queued .button-cancel {
-  display: inline;
-}
-
-.attachment-by-url.queued .file-url,
-.attachment-by-url.queued .button-attachment-download,
-.attachment-by-url.queued .button-delete,
-.attachment-by-url.queued .description {
-  display: none;
-}
-
-/* downloading in progress */
-
-.attachment-by-url.in_progress .state-text {
-  color: #000000;
-  display: inline;
-}
-.attachment-by-url.in_progress .button-cancel {
-  display: inline;
-}
-
-.attachment-by-url.in_progress .file-url,
-.attachment-by-url.in_progress .button-attachment-download,
-.attachment-by-url.in_progress .button-delete,
-.attachment-by-url.in_progress .description {
-  display: none;
-}
-
-/* downloading complete */
-
-.attachment-by-url.complete .button-delete,
-.attachment-by-url.complete .description {
-  display: inline;
-}
-
-.attachment-by-url.complete .state-text,
-.attachment-by-url.complete .file-url,
-.attachment-by-url.complete .button-attachment-download,
-.attachment-by-url.complete .button-cancel {
-  display: none;
-}
-
-/* downloading failed */
-
 .attachment-by-url.failed .state-text {
-  display: block;
-}
-.attachment-by-url.failed .file-url,
-.attachment-by-url.failed .button-attachment-download,
-.attachment-by-url.failed .button-delete {
-  display: inline;
+  color: #8b0000;
 }
 
-.attachment-by-url.failed .description,
-.attachment-by-url.failed .button-cancel {
+.attachment-by-url.completed .state-text {
+  color: #084f08;
+}
+
+.attachment-by-url.progress {
   display: none;
+  background-color: white;
+  height: 3px;
+  margin: 4px;
+  padding: 0;
+  width: 300px;
 }
 
+.attachment-by-url.progress-line {
+  background-color: green;
+  height: 3px;
+  margin: 0;
+  padding: 0;
+  width: 0%;
+}
