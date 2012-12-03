@@ -57,31 +57,38 @@ jQuery(document).ready(function($) {
     }
   }
 
+  function authAjax(attach, params) {
+    params.data['authenticity_token'] = $('input[name=authenticity_token]').first().val();
+    params.error = params.error || function(data, textStatus, jqXHR) {
+      attach.find(".state-text").text(textStatus);
+      changeAttachByUrlState(attach, "failed");
+    };
+    params.success = params.success || function(data, textStatus, jqXHR) {
+      attach.find("input.id").val(data["id"]);
+      attach.find(".state-text").text(data["state_text"]);
+      attach.data(data);
+
+      // draw progress-line
+      if (data["complete_bytes"] && data["total_bytes"]) {
+        var w = (data["complete_bytes"] / data["total_bytes"]) * 100;
+        attach.find(".progress-line").css("width", w + "%");
+      }
+
+      changeAttachByUrlState(attach, data["state"]);
+    };
+    params.dataType = 'json';
+    $.ajax(params);
+  }
+
+
+
   function checkAttachmentState(attach) {
     var attach_id = attach.find('input.id').val();
 
-    $.ajax({
+    authAjax(attach, {
       url: '/attachments_by_url/' + attach_id + '/state',
-      dataType: 'json',
       type: 'GET',
-      data: { attachment_by_url: { id: attach_id } },
-      success: function(data, textStatus, jqXHR) {
-        attach.find("input.id").val(data["id"]);
-        attach.find(".state-text").text(data["state_text"]);
-        attach.data(data);
-
-        // draw progress-line
-        if (data["complete_bytes"] && data["total_bytes"]) {
-          var w = (data["complete_bytes"] / data["total_bytes"]) * 100;
-          attach.find(".progress-line").css("width", w + "%");
-        }
-
-        changeAttachByUrlState(attach, data["state"]);
-      },
-      error: function(data, textStatus, jqXHR) {
-        attach.find(".state-text").text(textStatus);
-        changeAttachByUrlState(attach, "failed");
-      }
+      data: { attachment_by_url: { id: attach_id } }
     });
   }
 
@@ -125,21 +132,10 @@ jQuery(document).ready(function($) {
     var attach = $(this).closest('.attachment-by-url');
     var attach_url = attach.find('input.file-url').val();
 
-    $.ajax({
+    authAjax(attach, {
       url: '/attachments_by_url',
-      dataType: 'json',
       type: 'POST',
-      data: { attachment_by_url: { url: attach_url } },
-      success: function(data, textStatus, jqXHR) {
-        attach.find("input.id").val(data["id"]);
-        attach.find(".state-text").text(data["state_text"]);
-        // TODO: draw progress-bar
-        changeAttachByUrlState(attach, data["state"]);
-      },
-      error: function(data, textStatus, jqXHR) {
-        attach.find(".state-text").text(textStatus);
-        changeAttachByUrlState(attach, "failed");
-      }
+      data: { attachment_by_url: { url: attach_url } }
     });
 
     return false;
@@ -153,20 +149,10 @@ jQuery(document).ready(function($) {
     var attach = $(this).closest('.attachment-by-url');
     var attach_id = attach.find('input.id').val();
 
-    $.ajax({
+    authAjax(attach, {
       url: '/attachments_by_url/' + attach_id,
-      dataType: 'json',
       type: 'DELETE',
-      data: { attachment_by_url: { id: attach_id } },
-      success: function(data, textStatus, jqXHR) {
-        attach.find("input.id").val(data["id"]);
-        attach.find(".state-text").text(data["state_text"]);
-        changeAttachByUrlState(attach, data["state"]);
-      },
-      error: function(data, textStatus, jqXHR) {
-        attach.find(".state-text").text(textStatus);
-        changeAttachByUrlState(attach, "failed");
-      }
+      data: { attachment_by_url: { id: attach_id } }
     });
 
     return false;

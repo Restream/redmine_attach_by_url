@@ -1,5 +1,6 @@
 class AttachmentsByUrlController < ApplicationController
   unloadable
+  before_filter :authorize_global
 
   def create
     url = params[:attachment_by_url][:url]
