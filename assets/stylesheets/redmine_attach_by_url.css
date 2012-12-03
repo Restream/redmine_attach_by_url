@@ -2,8 +2,12 @@
   display: block;
 }
 
-.attachment-by-url .button-cancel {
+.attachment-by-url .button-cancel, .attachment-by-url .state-icon {
   display: none;
+}
+
+.attachment-by-url .state-icon.ready {
+  display: inline;
 }
 
 .attachment-by-url .file-url {
@@ -26,9 +30,9 @@
   display: none;
   background-color: white;
   height: 3px;
-  margin: 4px;
+  margin: 0 0 0 20px;
   padding: 0;
-  width: 300px;
+  width: 306px;
 }
 
 .attachment-by-url .progress-line {

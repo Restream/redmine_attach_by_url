@@ -14,30 +14,31 @@ jQuery(document).ready(function($) {
   }
 
   function manageVisibilityByState(attach, state) {
+    $(attach).find('.state-icon').hide();
     switch(state) {
       case "in_progress":
-        $(attach).find('.button-delete,.button-attachment-download').hide();
-        $(attach).find('.state-text,.button-cancel,.progress').show();
+        $(attach).find('.state-text,.button-delete,.button-attachment-download').hide();
+        $(attach).find('.button-cancel,.progress,.state-icon.in_progress').show();
         $(attach).find('.file-url').attr("disabled", "disabled");
         break;
       case "queued":
-        $(attach).find('.button-delete,.button-attachment-download,.progress').hide();
-        $(attach).find('.state-text,.button-cancel').show();
+        $(attach).find('.state-text,.button-delete,.button-attachment-download,.progress').hide();
+        $(attach).find('.button-cancel,.state-icon.queued').show();
         $(attach).find('.file-url').attr("disabled", "disabled");
         break;
       case "completed":
-        $(attach).find('.button-attachment-download,.button-cancel,.progress').hide();
-        $(attach).find('.button-delete,.state-text').show();
+        $(attach).find('.state-text,.button-attachment-download,.button-cancel,.progress').hide();
+        $(attach).find('.button-delete,.state-icon.completed').show();
         $(attach).find('.file-url').attr("disabled", "disabled");
         break;
       case "failed":
         $(attach).find('.button-cancel,.progress').hide();
-        $(attach).find('.state-text,.button-delete,.button-attachment-download').show();
+        $(attach).find('.state-text,.button-delete,.button-attachment-download,.state-icon.failed').show();
         $(attach).find('.file-url').removeAttr("disabled");
         break;
       default:
         $(attach).find('.state-text,.button-cancel,.progress').hide();
-        $(attach).find('.button-delete,.button-attachment-download').show();
+        $(attach).find('.button-delete,.button-attachment-download,.state-icon.ready').show();
         $(attach).find('.file-url').removeAttr("disabled");
     }
   }

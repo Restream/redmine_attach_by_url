@@ -5,11 +5,13 @@ module RedmineAttachByUrl
     attr_accessor :original_filename
   end
 
-  class DownloaderError < RuntimeError
-
-  end
-
   class Downloader
+    class FileTooBigError < RuntimeError
+    end
+
+    class StateChangedError < RuntimeError
+    end
+
     attr_reader :attach
 
     # update state every X seconds
@@ -27,7 +29,7 @@ module RedmineAttachByUrl
       file = uri.open(
         :content_length_proc => lambda { |total|
           if total > Setting.attachment_max_size.to_i.kilobytes
-            raise DownloaderError.new(I18n.t(
+            raise FileTooBigError.new(I18n.t(
                       :error_attachment_too_big,
                       :max_size => Setting.attachment_max_size.to_i.kilobytes))
           end
@@ -40,9 +42,7 @@ module RedmineAttachByUrl
             # check the state is still IN_PROGRESS
             canceled_attach = AttachmentByUrl.first(:conditions =>
                 ["id = ? and state <> ?", attach.id, AttachmentByUrl::IN_PROGRESS])
-            raise DownloaderError.new( canceled_attach.state_text.blank? ?
-                      I18n.t(:message_download_was_interrupted) :
-                      attach.state_text) if canceled_attach
+            raise StateChangedError.new() if canceled_attach
 
             attach.save!
           end
@@ -59,6 +59,9 @@ module RedmineAttachByUrl
       end
 
       attach.save!
+    rescue StateChangedError
+      # just stop downloading
+      raise
     rescue Exception => error
       attach.state = AttachmentByUrl::FAILED
       attach.state_text = error.message
