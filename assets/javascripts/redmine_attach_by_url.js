@@ -31,8 +31,8 @@ jQuery(document).ready(function($) {
         $(attach).find('.file-url').attr("disabled", "disabled");
         break;
       case "failed":
-        $(attach).find('.button-cancel').hide();
-        $(attach).find('.state-text,.button-delete,.button-attachment-download,.progress').show();
+        $(attach).find('.button-cancel,.progress').hide();
+        $(attach).find('.state-text,.button-delete,.button-attachment-download').show();
         $(attach).find('.file-url').removeAttr("disabled");
         break;
       default:
