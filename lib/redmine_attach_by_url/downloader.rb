@@ -75,6 +75,7 @@ module RedmineAttachByUrl
     private
 
     def check_size!(size_in_bytes)
+      size_in_bytes ||= 0
       if size_in_bytes > Setting.attachment_max_size.to_i.kilobytes
         raise FileTooBigError.new(I18n.t(
           :error_attachment_too_big,

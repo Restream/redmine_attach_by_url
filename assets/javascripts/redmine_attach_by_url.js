@@ -81,8 +81,6 @@ jQuery(document).ready(function($) {
     $.ajax(params);
   }
 
-
-
   function checkAttachmentState(attach) {
     var attach_id = attach.find('input.id').val();
 
@@ -126,12 +124,7 @@ jQuery(document).ready(function($) {
     return false;
   });
 
-  // start download attachment
-  $('#attachments-by-url').on("click", ".attachment-by-url .button-attachment-download", function(evt) {
-
-    evt.stopPropagation();
-
-    var attach = $(this).closest('.attachment-by-url');
+  function downloadAttachByUrl(attach){
     var attach_url = attach.find('input.file-url').val();
 
     authAjax(attach, {
@@ -139,9 +132,31 @@ jQuery(document).ready(function($) {
       type: 'POST',
       data: { attachment_by_url: { url: attach_url } }
     });
+  }
+
+  // start download attachment
+  $('#attachments-by-url').on("click", ".attachment-by-url .button-attachment-download", function(evt) {
+
+    evt.stopPropagation();
+
+    var attach = $(this).closest('.attachment-by-url');
+    downloadAttachByUrl(attach);
 
     return false;
   });
+
+  // start downloading when url change
+  $('#attachments-by-url')
+    .on("input propertychange", ".attachment-by-url input.file-url", function(evt) {
+
+      var attach = $(this).closest('.attachment-by-url');
+      if (attach.is("queued,.in_progress,.failed,.canceled,.completed")) return;
+
+      var regUrl = /^(https?:\/\/)([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?[\?]?(\w+=[^&]*&?)*$/
+      if  (this.value != "" && regUrl.test(this.value)) {
+        downloadAttachByUrl(attach);
+      }
+    });
 
   // cancel download attachment
   $('#attachments-by-url').on("click", ".attachment-by-url .button-cancel", function(evt) {
