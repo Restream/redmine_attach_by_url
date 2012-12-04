@@ -11,8 +11,8 @@ ru:
   button_attachment_cancel: "Отменить загрузку"
 
   message_attachment_by_url_state:
-    queued: "Download will starts shortly."
-    in_progress: "Downloading in progress..."
-    canceled: "Downloading was cancelled."
-    completed: "Downloading completed successfully."
-    failed: "Downloading failed."
+    queued: "Загрузка скоро начнется."
+    in_progress: "Файл загружается..."
+    canceled: "Загрузка отменена."
+    completed: "Загрузка завершена."
+    failed: "Загрузка не удалась."

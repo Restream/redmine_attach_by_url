@@ -1,8 +1,9 @@
 module RedmineAttachByUrl
   class DownloadService
     class << self
-      def download_start(url)
+      def download_start(url, author)
         attach = AttachmentByUrl.new(:url => url,
+                                     :author => author,
                                      :state => AttachmentByUrl::QUEUED)
         attach.save
         RedmineAttachByUrl::Downloader.delay.download(attach.id)

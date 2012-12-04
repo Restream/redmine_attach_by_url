@@ -9,7 +9,9 @@ class AttachmentByUrl < ActiveRecord::Base
 
   STATES = [QUEUED, IN_PROGRESS, CANCELED, COMPLETED, FAILED]
 
-  validates_presence_of :url, :state
+  belongs_to :author, :class_name => "User"
+
+  validates_presence_of :url, :state, :author
   validates_inclusion_of :state, :in => STATES
   validate :validate_url_scheme, :validate_url_safety
 
@@ -37,10 +39,5 @@ class AttachmentByUrl < ActiveRecord::Base
     errors.add(:url, I18n.t(:message_invalid_url))
   rescue
     errors.add(:url, I18n.t(:message_url_is_not_safe))
-  end
-
-  def author
-    # TODO: fix it
-    User.last
   end
 end

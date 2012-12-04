@@ -102,6 +102,7 @@ jQuery(document).ready(function($) {
     var newAttach = $('.attachment-by-url').last().clone();
 
     newAttach.find('input.id,input.file-url,input.description').val('');
+    newAttach.find('.progress-line').css("width", 0);
 
     newAttach.find('input.id').attr("name",
       "attachments_by_url[" + fileFieldCount + "][id]");
