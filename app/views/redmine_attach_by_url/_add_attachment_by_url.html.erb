@@ -26,19 +26,19 @@
         :class => "file-url",
         :placeholder => l(:label_file_url),
         :title => l(:label_file_url) %>
+      <%= link_to image_tag('page_white_go.png', :plugin => 'redmine_attach_by_url'), "#",
+        :class => "button-attachment-download",
+        :title => l(:button_attachment_download) %>
+      <%= link_to image_tag('cancel.png', :plugin => 'redmine_attach_by_url'), "#",
+        :class => "button-cancel",
+        :title => l(:button_attachment_cancel) %>
       <%= text_field_tag 'attachments_by_url[1][description]', '', :id => nil,
         :class => 'description',
         :placeholder => l(:label_optional_description),
         :title => l(:label_optional_description) %>
-      <%= link_to image_tag('page_white_go.png', :plugin => 'redmine_attach_by_url'), "#",
-          :class => "button-attachment-download",
-          :title => l(:button_attachment_download) %>
-      <%= link_to image_tag('cancel.png', :plugin => 'redmine_attach_by_url'), "#",
-          :class => "button-cancel",
-          :title => l(:button_attachment_cancel) %>
       <%= link_to image_tag('delete.png'), "#",
-          :class => "button-delete",
-          :title => l(:button_delete) %>
+        :class => "button-delete",
+        :title => l(:button_delete) %>
     </div>
   </div>
   <span class="add_attachment">

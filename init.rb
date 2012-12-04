@@ -1,4 +1,12 @@
 require 'redmine'
+require 'dispatcher'
+
+Dispatcher.to_prepare do
+  require_dependency 'issue'
+  unless Issue.included_modules.include? RedmineAttachByUrl::IssuePatch
+    Issue.send :include, RedmineAttachByUrl::IssuePatch
+  end
+end
 
 require 'redmine_attach_by_url/inflections'
 require 'redmine_attach_by_url/hooks'

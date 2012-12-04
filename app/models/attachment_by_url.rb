@@ -10,6 +10,7 @@ class AttachmentByUrl < ActiveRecord::Base
   STATES = [QUEUED, IN_PROGRESS, CANCELED, COMPLETED, FAILED]
 
   belongs_to :author, :class_name => "User"
+  belongs_to :attachment
 
   validates_presence_of :url, :state, :author
   validates_inclusion_of :state, :in => STATES

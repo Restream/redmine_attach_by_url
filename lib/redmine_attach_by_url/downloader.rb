@@ -53,6 +53,7 @@ module RedmineAttachByUrl
         attach.state_text = a.errors.full_messages.join("; ")
       else
         attach.state = AttachmentByUrl::COMPLETED
+        attach.attachment = a
       end
 
       attach.save!
