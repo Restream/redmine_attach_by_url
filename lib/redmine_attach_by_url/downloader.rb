@@ -28,14 +28,11 @@ module RedmineAttachByUrl
       uri = URI.parse(attach.url)
       file = uri.open(
         :content_length_proc => lambda { |total|
-          if total > Setting.attachment_max_size.to_i.kilobytes
-            raise FileTooBigError.new(I18n.t(
-                      :error_attachment_too_big,
-                      :max_size => Setting.attachment_max_size.to_i.kilobytes))
-          end
+          check_size!(total)
           attach.total_bytes = total
         },
         :progress_proc => lambda { |downloaded_bytes|
+          check_size!(downloaded_bytes)
           attach.complete_bytes = downloaded_bytes
           if Time.now - attach.updated_at > UPDATE_INTERVAL
 
@@ -75,6 +72,14 @@ module RedmineAttachByUrl
     end
 
     private
+
+    def check_size!(size_in_bytes)
+      if size_in_bytes > Setting.attachment_max_size.to_i.kilobytes
+        raise FileTooBigError.new(I18n.t(
+          :error_attachment_too_big,
+          :max_size => Setting.attachment_max_size.to_i.kilobytes))
+      end
+    end
 
     def guess_extension(content_type)
       Redmine::MimeType::MIME_TYPES[content_type].to_s.split(',').first || "unknown"
