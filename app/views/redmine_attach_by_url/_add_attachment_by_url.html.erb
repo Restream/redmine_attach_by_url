@@ -15,14 +15,14 @@
     <div class="attachment-by-url">
       <span class="state-text"></span>
       <div class="progress"><div class="progress-line"></div></div>
-      <%= hidden_field_tag 'attachments_by_url[1][id]', '', :class => 'id' %>
+      <%= hidden_field_tag 'attachments_by_url[1][id]', '', :id => nil, :class => 'id' %>
 
       <%= image_tag 'bullet_white.png', :class => 'state-icon ready', :plugin => 'redmine_attach_by_url' %>
       <%= image_tag 'bullet_orange.png', :class => 'state-icon queued', :plugin => 'redmine_attach_by_url' %>
       <%= image_tag 'bullet_go.png', :class => 'state-icon in_progress', :plugin => 'redmine_attach_by_url' %>
       <%= image_tag 'bullet_green.png', :class => 'state-icon completed', :plugin => 'redmine_attach_by_url' %>
       <%= image_tag 'bullet_error.png', :class => 'state-icon failed', :plugin => 'redmine_attach_by_url' %>
-      <%= text_field_tag 'attachments_by_url[1][url]', '',
+      <%= text_field_tag 'attachments_by_url[1][url]', '', :id => nil,
         :class => "file-url",
         :placeholder => l(:label_file_url),
         :title => l(:label_file_url) %>

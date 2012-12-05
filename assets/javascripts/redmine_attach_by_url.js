@@ -118,9 +118,10 @@ jQuery(document).ready(function($) {
   // remove attachment handler
   $('#attachments-by-url').on("click", ".button-delete", function(evt) {
     evt.stopPropagation();
-    if ($('.attachment-by-url').length > 1) {
-      $(this).closest('.attachment-by-url').remove();
+    if ($('.attachment-by-url').length < 2) {
+      $("#attachments-by-url-fieldset a.add_attachment").click();
     }
+    $(this).closest('.attachment-by-url').remove();
     return false;
   });
 
