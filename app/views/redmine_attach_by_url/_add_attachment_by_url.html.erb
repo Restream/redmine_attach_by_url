@@ -26,9 +26,11 @@
         :class => "file-url",
         :placeholder => l(:label_file_url),
         :title => l(:label_file_url) %>
-      <%= link_to image_tag('page_white_go.png', :plugin => 'redmine_attach_by_url'), "#",
+      <%= link_to image_tag('page_go.png', :plugin => 'redmine_attach_by_url'), "#",
         :class => "button-attachment-download",
         :title => l(:button_attachment_download) %>
+      <%= image_tag('page_white.png', :plugin => 'redmine_attach_by_url',
+        :class => "dummy") %>
       <%= link_to image_tag('cancel.png', :plugin => 'redmine_attach_by_url'), "#",
         :class => "button-cancel",
         :title => l(:button_attachment_cancel) %>

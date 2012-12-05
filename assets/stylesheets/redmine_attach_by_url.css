@@ -2,7 +2,9 @@
   display: block;
 }
 
-.attachment-by-url .button-cancel, .attachment-by-url .state-icon {
+.attachment-by-url .button-cancel,
+.attachment-by-url .dummy,
+.attachment-by-url .state-icon {
   display: none;
 }
 
