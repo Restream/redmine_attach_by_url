@@ -22,14 +22,14 @@ class AttachmentByUrl < ActiveRecord::Base
     # allow only http and https
     raise "error" unless /^https?$/ =~ uri.scheme
   rescue
+    self.state = FAILED
     errors.add(:url, I18n.t(:message_invalid_url))
   end
 
   def validate_url_safety
     uri = URI.parse(url)
 
-    # deny localhost
-    raise "deny localhost" if /^localhost?$/ =~ uri.host
+    raise "host must be present" unless uri.host
 
     # deny private networks
     if Regexp.new(uri.parser.pattern[:IPV4ADDR]) =~ uri.host
@@ -37,8 +37,10 @@ class AttachmentByUrl < ActiveRecord::Base
       raise "deny private networks" if private_re =~ uri.host
     end
   rescue URI::InvalidURIError
+    self.state = FAILED
     errors.add(:url, I18n.t(:message_invalid_url))
   rescue
+    self.state = FAILED
     errors.add(:url, I18n.t(:message_url_is_not_safe))
   end
 end

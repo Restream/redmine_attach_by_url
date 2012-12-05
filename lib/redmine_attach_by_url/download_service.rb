@@ -5,8 +5,9 @@ module RedmineAttachByUrl
         attach = AttachmentByUrl.new(:url => url,
                                      :author => author,
                                      :state => AttachmentByUrl::QUEUED)
-        attach.save
-        RedmineAttachByUrl::Downloader.delay.download(attach.id)
+        if attach.save
+          RedmineAttachByUrl::Downloader.delay.download(attach.id)
+        end
         attach
       end
 

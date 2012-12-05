@@ -25,4 +25,8 @@ Redmine::Plugin.register :redmine_attach_by_url do
   version '0.0.1'
   url 'https://github.com/nodecarter/redmine_attach_by_url'
   author_url 'https://github.com/Undev'
+
+  permission :attach_by_url,
+             { :attachments_by_url => [:create, :state, :destroy] },
+             :public => true
 end
