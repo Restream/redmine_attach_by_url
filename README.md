@@ -30,4 +30,4 @@ Plugin does not require to be configured.
 
 ## Compatibility
 
-This version was tested only with Redmine 1.4
+This version supports only redmine 2.x. See redmine-1.x branch for Redmine 1.x.

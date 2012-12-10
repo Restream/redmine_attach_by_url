@@ -1,1 +1,1 @@
-gem 'delayed_job', '~>2.0.4'
+gem 'delayed_job_active_record'
