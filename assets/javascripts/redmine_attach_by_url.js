@@ -77,6 +77,13 @@ jQuery(document).ready(function($) {
 
       changeAttachByUrlState(attach, data["state"]);
     };
+
+    // don't show loading indicator
+    attach.addClass('ajax-loading');
+    params.complete = function(jqXHR, textStatus) {
+      attach.removeClass('ajax-loading');
+    };
+
     params.dataType = 'json';
     $.ajax(params);
   }
