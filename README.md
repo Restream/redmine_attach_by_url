@@ -1,5 +1,8 @@
 # RedmineAttachByUrl
 
+[![Build Status](https://travis-ci.org/nodecarter/redmine_attach_by_url.png)](https://travis-ci.org/nodecarter/redmine_attach_by_url)
+[![Code Climate](https://codeclimate.com/github/nodecarter/redmine_attach_by_url.png)](https://codeclimate.com/github/nodecarter/redmine_attach_by_url)
+
 ## Description
 
 Plugin for redmine making it possible to attach file to issue by its url.
