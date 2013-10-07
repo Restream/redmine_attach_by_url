@@ -1,0 +1,18 @@
+bg:
+  label_file_url: "Въведете URL на файла, който искате да прикачите"
+  label_attachments_by_url : "Прикачване на файлове от URL"
+
+  message_download_success: "Прикачването от %{url} е завършена."
+  message_download_failed: "Прикачването от %{url} е неуспешно"
+  message_invalid_url: "е неправилен! Пример за правилен URL: http(s)://example.com/file.png"
+  message_download_was_interrupted: "Прикачването беше прекратено"
+
+  button_attachment_download: "Прикачване"
+  button_attachment_cancel: "Отмяна на прикачване"
+
+  message_attachment_by_url_state:
+    queued: "Прикачването ще започне след малко."
+    in_progress: "Файлът се прикачва..."
+    canceled: "Прикачването е отменено."
+    completed: "Прикачването е завършено."
+    failed: "Прикачването е неуспешно."
