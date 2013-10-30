@@ -3,6 +3,8 @@ jQuery(document).ready(function($) {
   $('#attachments-by-url-fieldset')
     .appendTo($('#attachments_fields').closest('.box'));
 
+  var fileFieldCount = 0;
+
   function cleanArray(actual){
     var newArray = new Array();
     for(var i = 0; i < actual.length; i++) {
