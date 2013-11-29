@@ -14,7 +14,7 @@ module RedmineAttachByUrl
           attachments.each do |attachment|
             a_by_url = AttachmentByUrl.first(:conditions => [
                 'id = ? and state = ?',
-                attachment['id'],
+                attachment['id'].to_i,
                 AttachmentByUrl::COMPLETED ])
 
             if a_by_url && (a = a_by_url.attachment)
