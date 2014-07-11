@@ -44,7 +44,8 @@ module RedmineAttachByUrl
 
             attach.save!
           end
-        }
+        },
+        :allow_redirections => :all
       )
       file.extend OriginalFilename
       file.original_filename = guess_file_name(file.content_type)
