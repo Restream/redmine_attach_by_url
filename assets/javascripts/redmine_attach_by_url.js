@@ -112,11 +112,11 @@ jQuery(document).ready(function($) {
     newAttach.find('.progress-line').css("width", 0);
 
     newAttach.find('input.id').attr("name",
-      "attachments_by_url[" + fileFieldCount + "][id]");
+      "attachments_by_url[][id]");
     newAttach.find('input.file-url').attr("name",
-      "attachments_by_url[" + fileFieldCount + "][url]");
+      "attachments_by_url[][url]");
     newAttach.find('input.description').attr("name",
-      "attachments_by_url[" + fileFieldCount + "][description]");
+      "attachments_by_url[][description]");
 
     changeAttachByUrlState(newAttach, null);
 

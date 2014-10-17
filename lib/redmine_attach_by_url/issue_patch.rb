@@ -7,9 +7,7 @@ module RedmineAttachByUrl
 
     module InstanceMethods
       def save_attachments_by_url(attachments)
-        if attachments.is_a?(Hash)
-          attachments = attachments.values
-        end
+        attachments = attachments.values if attachments.is_a?(Hash)
         if attachments.is_a?(Array)
           attachments.each do |attachment|
             a_by_url = AttachmentByUrl.first(:conditions => [
