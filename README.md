@@ -1,4 +1,4 @@
-# RedmineAttachByUrl
+# Redmine Attach_By_Url Plugin
 
 [![Build Status](https://travis-ci.org/nodecarter/redmine_attach_by_url.png)](https://travis-ci.org/nodecarter/redmine_attach_by_url)
 [![Code Climate](https://codeclimate.com/github/nodecarter/redmine_attach_by_url.png)](https://codeclimate.com/github/nodecarter/redmine_attach_by_url)
