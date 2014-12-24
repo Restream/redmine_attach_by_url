@@ -21,8 +21,8 @@ Redmine::Plugin.register :redmine_attach_by_url do
   name 'Redmine Attach By Url plugin'
   author 'nodecarter'
   description 'This is a plugin for Redmine for attaching files to issue by url'
-  version '0.1.4'
-  url 'https://github.com/nodecarter/redmine_attach_by_url'
+  version '1.0.0'
+  url 'https://github.com/Undev/redmine_attach_by_url'
   author_url 'https://github.com/nodecarter'
 
   permission :attach_by_url,
