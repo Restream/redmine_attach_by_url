@@ -20,7 +20,7 @@ Delayed::Worker.max_run_time = 10.minutes
 Redmine::Plugin.register :redmine_attach_by_url do
   name 'Redmine Attachment By URL Plugin'
   author 'Undev'
-  description 'Attach files to issues by URL.'
+  description 'This plugin enables attaching files to issues by URL.'
   version '0.1.4'
   url 'https://github.com/nodecarter/redmine_attach_by_url'
   author_url 'https://github.com/nodecarter'
