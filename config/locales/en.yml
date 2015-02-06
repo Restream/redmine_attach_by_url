@@ -1,18 +1,18 @@
 en:
-  label_file_url: "Enter file url you want to attach."
-  label_attachments_by_url : "Attachments by url"
+  label_file_url: "Enter URL of the file you want to attach."
+  label_attachments_by_url : "Attachments by URL"
 
-  message_download_success: "Downloading from %{url} complete."
-  message_download_failed: "Downloading from %{url} failed."
-  message_invalid_url: "invalid! Example of valid url: http(s)://example.com/file.png"
-  message_download_was_interrupted: "Download was interrupted"
+  message_download_success: "Download from %{url} is complete."
+  message_download_failed: "Download from %{url} failed."
+  message_invalid_url: "invalid! Example of a valid URL: http(s)://example.com/file.png"
+  message_download_was_interrupted: "Download was interrupted."
 
   button_attachment_download: "Download"
   button_attachment_cancel: "Cancel download"
 
   message_attachment_by_url_state:
-    queued: "Download will starts shortly."
-    in_progress: "Downloading in progress..."
-    canceled: "Downloading was cancelled."
-    completed: "Downloading completed successfully."
-    failed: "Downloading failed."
+    queued: "Download will start shortly."
+    in_progress: "Download in progress..."
+    canceled: "Download was cancelled."
+    completed: "Download was completed successfully."
+    failed: "Download failed."

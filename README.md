@@ -1,11 +1,11 @@
-# Redmine Attach_By_Url Plugin
+# Redmine Attachment By URL Plugin
 
 [![Build Status](https://travis-ci.org/Undev/redmine_attach_by_url.png)](https://travis-ci.org/Undev/redmine_attach_by_url)
 [![Code Climate](https://codeclimate.com/github/Undev/redmine_attach_by_url.png)](https://codeclimate.com/github/Undev/redmine_attach_by_url)
 
 ## Description
 
-This plugin adds **Attachments by url** block to the issue form and enables you to attach files to issues by URL. Files are downloaded from public resources and placed into *#{REDMINE_ROOT}/attachments/download/* by the server. You can add as many files as you need when you create or edit an issue. Once the file is uploaded, it can be opened, saved or deleted in a regular way. This plugin prevents possible loss of information if the file's public URL becomes unavailable.
+This plugin adds **Attachments by URL** block to the issue form and enables you to attach files to issues by URL. Files are downloaded from public resources and placed into *#{REDMINE_ROOT}/attachments/download/* by the server. You can add as many files as you need when you create or edit an issue. Once the file is uploaded, it can be opened, saved or deleted in a regular way. This plugin prevents possible loss of information if the file's public URL becomes unavailable.
 
 ## Compatibility
 
@@ -33,7 +33,7 @@ This plugin version is compatible with Redmine 2.x only.
 
 3. This plugin requires a migration. Run the following command to upgrade your database (make a database backup before):  
 
-        rake redmine:plugins:migrate RAILS_ENV=production
+        bundle exec rake redmine:plugins:migrate RAILS_ENV=production
 
 3. Restart Redmine.
 4. Start the delayed_job worker gem:  
@@ -44,8 +44,8 @@ Now you should be able to see the plugin in **Administration > Plugins**.
 
 ## Usage
 
-1. To attach a file to an issue, enter the file's URL into the corresponding field in the **Attachments by url** block. If needed, add a description.
-![attach by url](attach_by_url.png)
+1. To attach a file to an issue, enter the file's URL into the corresponding field in the **Attachments by URL** block. If needed, add a description.
+![attach by url](attach_by_url.png) 
 2. Wait for the file to upload.
 3. To add another file, click **Add another file**.
 4. To delete the attachment, click the trash bin icon. 
@@ -55,7 +55,7 @@ Now you should be able to see the plugin in **Administration > Plugins**.
 
 ## License
 
-Copyright (c) 2014 Undev
+Copyright (c) 2015 Undev
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
