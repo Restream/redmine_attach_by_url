@@ -24,7 +24,7 @@ This plugin version is compatible with Redmine 2.x only.
             
       Copy the plugin from GitHub using the following commands:  
       
-            git clone git://github.com/nodecarter/redmine_attach_by_url.git plugins/redmine_attach_by_url
+            git clone https://github.com/Undev/redmine_attach_by_url.git plugins/redmine_attach_by_url
         
 2. Run the following commands to update the Gemfile.lock file and install the delayed_job gem:  
 
