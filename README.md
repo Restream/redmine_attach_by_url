@@ -45,7 +45,7 @@ Now you should be able to see the plugin in **Administration > Plugins**.
 ## Usage
 
 1. To attach a file to an issue, enter the file's URL into the corresponding field in the **Attachments by URL** block. If needed, add a description.
-![attach by url](attach_by_url.PNG) 
+![attach by URL](attach_by_url.PNG) 
 2. Wait for the file to upload.
 3. To add another file, click **Add another file**.
 4. To delete the attachment, click the trash bin icon. 
