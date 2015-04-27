@@ -1,7 +1,7 @@
 # Redmine Attachment By URL Plugin
 
-[![Build Status](https://travis-ci.org/nodecarter/redmine_attach_by_url.png)](https://travis-ci.org/nodecarter/redmine_attach_by_url)
-[![Code Climate](https://codeclimate.com/github/nodecarter/redmine_attach_by_url.png)](https://codeclimate.com/github/nodecarter/redmine_attach_by_url)
+[![Build Status](https://travis-ci.org/Undev/redmine_attach_by_url.png)](https://travis-ci.org/Undev/redmine_attach_by_url)
+[![Code Climate](https://codeclimate.com/github/Undev/redmine_attach_by_url.png)](https://codeclimate.com/github/Undev/redmine_attach_by_url)
 
 ## Description
 
@@ -52,6 +52,9 @@ Now you should be able to see the plugin in **Administration > Plugins**.
 5. After you create the issue or submit changes to it, you can view, download or delete the attachment.
 ![delete attachment](attach_by_url_1.PNG)
 
+## Maintainers
+
+Danil Tashkinov, [github.com/nodecarter](https://github.com/nodecarter)
 
 ## License
 
