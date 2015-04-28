@@ -24,7 +24,7 @@ This plugin version is compatible with Redmine 2.x only.
             
       Copy the plugin from GitHub using the following commands:  
       
-            git clone git://github.com/Undev/redmine_attach_by_url.git plugins/redmine_attach_by_url
+            git clone https://github.com/Undev/redmine_attach_by_url.git plugins/redmine_attach_by_url
         
 2. Run the following commands to update the Gemfile.lock file and install the delayed_job gem:  
 
@@ -52,6 +52,9 @@ Now you should be able to see the plugin in **Administration > Plugins**.
 5. After you create the issue or submit changes to it, you can view, download or delete the attachment.
 ![delete attachment](attach_by_url_1.png)
 
+## Maintainers
+
+Danil Tashkinov, [github.com/nodecarter](https://github.com/nodecarter)
 
 ## License
 
