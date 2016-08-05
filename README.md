@@ -1,7 +1,7 @@
 # Redmine Attachment By URL Plugin
 
-[![Build Status](https://travis-ci.org/Restream/redmine_attach_by_url.png)](https://travis-ci.org/Restream/redmine_attach_by_url)
-[![Code Climate](https://codeclimate.com/github/Restream/redmine_attach_by_url.png)](https://codeclimate.com/github/Restream/redmine_attach_by_url)
+[![Build Status](https://travis-ci.org/Restream/redmine_attach_by_url.svg?branch=master)](https://travis-ci.org/Restream/redmine_attach_by_url)
+[![Code Climate](https://codeclimate.com/github/Restream/redmine_attach_by_url/badges/gpa.svg)](https://codeclimate.com/github/Restream/redmine_attach_by_url)
 
 ## Description
 
