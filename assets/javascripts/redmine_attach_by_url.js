@@ -162,10 +162,7 @@ jQuery(document).ready(function($) {
       var attach = $(this).closest('.attachment-by-url');
       if (attach.is("queued,.in_progress,.failed,.canceled,.completed")) return;
 
-      var regUrl = /^(https?:\/\/)([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?[\?]?(\w+=[^&]*&?)*$/
-      if  (this.value != "" && regUrl.test(this.value)) {
-        downloadAttachByUrl(attach);
-      }
+      downloadAttachByUrl(attach);
     });
 
   // cancel download attachment
