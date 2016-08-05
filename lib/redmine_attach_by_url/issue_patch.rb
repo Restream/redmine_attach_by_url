@@ -21,5 +21,5 @@ module RedmineAttachByUrl
 end
 
 unless Issue.included_modules.include? RedmineAttachByUrl::IssuePatch
-  Issue.include RedmineAttachByUrl::IssuePatch
+  Issue.send :include, RedmineAttachByUrl::IssuePatch
 end
