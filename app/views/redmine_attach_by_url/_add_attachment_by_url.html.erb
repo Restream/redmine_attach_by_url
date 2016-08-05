@@ -5,14 +5,6 @@
    if request.format == Mime::HTML
 %>
 
-<script type="text/javascript">
-  if(typeof(jQuery) == 'undefined') {
-    document.write("<%= escape_javascript(
-        javascript_include_tag('jquery-1.7.2.min.js', plugin: 'redmine_attach_by_url')) %>");
-    document.write("<%= escape_javascript(
-        javascript_include_tag('jquery-noconflict.js', plugin: 'redmine_attach_by_url')) %>");
-  }
-</script>
 <%= javascript_include_tag 'redmine_attach_by_url', plugin: 'redmine_attach_by_url' %>
 
 <fieldset id="attachments-by-url-fieldset">
