@@ -1,7 +1,7 @@
 # Redmine Attachment By URL Plugin
 
-[![Build Status](https://travis-ci.org/Undev/redmine_attach_by_url.png)](https://travis-ci.org/Undev/redmine_attach_by_url)
-[![Code Climate](https://codeclimate.com/github/Undev/redmine_attach_by_url.png)](https://codeclimate.com/github/Undev/redmine_attach_by_url)
+[![Build Status](https://travis-ci.org/Restream/redmine_attach_by_url.png)](https://travis-ci.org/Restream/redmine_attach_by_url)
+[![Code Climate](https://codeclimate.com/github/Restream/redmine_attach_by_url.png)](https://codeclimate.com/github/Restream/redmine_attach_by_url)
 
 ## Description
 
@@ -9,7 +9,7 @@ This plugin adds **Attachments by URL** block to the issue form and enables you 
 
 ## Compatibility
 
-This plugin version is compatible with Redmine 2.x only.
+This plugin version is compatible with Redmine 2.3 and newer.
 
 ## Installation
 
@@ -24,7 +24,7 @@ This plugin version is compatible with Redmine 2.x only.
             
       Copy the plugin from GitHub using the following commands:  
       
-            git clone https://github.com/Undev/redmine_attach_by_url.git plugins/redmine_attach_by_url
+            git clone https://github.com/Restream/redmine_attach_by_url.git plugins/redmine_attach_by_url
         
 2. Run the following commands to update the Gemfile.lock file and install the delayed_job gem:  
 
@@ -45,12 +45,12 @@ Now you should be able to see the plugin in **Administration > Plugins**.
 ## Usage
 
 1. To attach a file to an issue, enter the file's URL into the corresponding field in the **Attachments by URL** block. If needed, add a description.
-![attach by url](attach_by_url.png) 
+![attach by url](doc/attach_by_url.png) 
 2. Wait for the file to upload.
 3. To add another file, click **Add another file**.
 4. To delete the attachment, click the trash bin icon. 
 5. After you create the issue or submit changes to it, you can view, download or delete the attachment.
-![delete attachment](attach_by_url_1.png)
+![delete attachment](doc/attach_by_url_1.png)
 
 ## Maintainers
 
@@ -58,7 +58,7 @@ Danil Tashkinov, [github.com/nodecarter](https://github.com/nodecarter)
 
 ## License
 
-Copyright (c) 2015 Undev
+Copyright (c) 2016 Restream
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

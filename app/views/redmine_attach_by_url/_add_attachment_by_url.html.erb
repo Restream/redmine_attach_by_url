@@ -1,4 +1,4 @@
-<%= stylesheet_link_tag 'redmine_attach_by_url', :plugin => 'redmine_attach_by_url' %>
+<%= stylesheet_link_tag 'redmine_attach_by_url', plugin: 'redmine_attach_by_url' %>
 
 <%
    # prevent to add fieldset twice
@@ -8,12 +8,12 @@
 <script type="text/javascript">
   if(typeof(jQuery) == 'undefined') {
     document.write("<%= escape_javascript(
-        javascript_include_tag('jquery-1.7.2.min.js', :plugin => 'redmine_attach_by_url')) %>");
+        javascript_include_tag('jquery-1.7.2.min.js', plugin: 'redmine_attach_by_url')) %>");
     document.write("<%= escape_javascript(
-        javascript_include_tag('jquery-noconflict.js', :plugin => 'redmine_attach_by_url')) %>");
+        javascript_include_tag('jquery-noconflict.js', plugin: 'redmine_attach_by_url')) %>");
   }
 </script>
-<%= javascript_include_tag 'redmine_attach_by_url', :plugin => 'redmine_attach_by_url' %>
+<%= javascript_include_tag 'redmine_attach_by_url', plugin: 'redmine_attach_by_url' %>
 
 <fieldset id="attachments-by-url-fieldset">
   <legend><%= l(:label_attachments_by_url) %></legend>
@@ -21,36 +21,38 @@
     <div class="attachment-by-url">
       <span class="state-text"></span>
       <div class="progress"><div class="progress-line"></div></div>
-      <%= hidden_field_tag 'attachments_by_url[][id]', '', :id => nil, :class => 'id' %>
+      <%= hidden_field_tag 'attachments_by_url[][id]', '', id: nil, class: 'id' %>
 
-      <%= image_tag 'bullet_white.png', :class => 'state-icon ready', :plugin => 'redmine_attach_by_url' %>
-      <%= image_tag 'bullet_orange.png', :class => 'state-icon queued', :plugin => 'redmine_attach_by_url' %>
-      <%= image_tag 'bullet_go.png', :class => 'state-icon in_progress', :plugin => 'redmine_attach_by_url' %>
-      <%= image_tag 'bullet_green.png', :class => 'state-icon completed', :plugin => 'redmine_attach_by_url' %>
-      <%= image_tag 'bullet_error.png', :class => 'state-icon failed', :plugin => 'redmine_attach_by_url' %>
-      <%= text_field_tag 'attachments_by_url[][url]', '', :id => nil,
-        :class => "file-url",
-        :placeholder => l(:label_file_url),
-        :title => l(:label_file_url) %>
-      <%= link_to image_tag('page_go.png', :plugin => 'redmine_attach_by_url'), "#",
-        :class => "button-attachment-download",
-        :title => l(:button_attachment_download) %>
+      <%= image_tag 'bullet_white.png', class: 'state-icon ready', plugin: 'redmine_attach_by_url' %>
+      <%= image_tag 'bullet_orange.png', class: 'state-icon queued', plugin: 'redmine_attach_by_url' %>
+      <%= image_tag 'bullet_go.png', class: 'state-icon in_progress', plugin: 'redmine_attach_by_url' %>
+      <%= image_tag 'bullet_green.png', class: 'state-icon completed', plugin: 'redmine_attach_by_url' %>
+      <%= image_tag 'bullet_error.png', class: 'state-icon failed', plugin: 'redmine_attach_by_url' %>
+      <%= text_field_tag 'attachments_by_url[][url]', '',
+                         id:          nil,
+                         class:       'file-url',
+                         placeholder: l(:label_file_url),
+                         title:       l(:label_file_url) %>
+      <%= link_to image_tag('page_go.png', plugin: 'redmine_attach_by_url'), '#',
+                  class: 'button-attachment-download',
+                  title: l(:button_attachment_download) %>
       <%= image_tag('page_white.png', :plugin => 'redmine_attach_by_url',
-        :class => "dummy") %>
-      <%= link_to image_tag('cancel.png', :plugin => 'redmine_attach_by_url'), "#",
-        :class => "button-cancel",
-        :title => l(:button_attachment_cancel) %>
-      <%= text_field_tag 'attachments_by_url[][description]', '', :id => nil,
-        :class => 'description',
-        :placeholder => l(:label_optional_description),
-        :title => l(:label_optional_description) %>
-      <%= link_to image_tag('delete.png'), "#",
-        :class => "button-delete",
-        :title => l(:button_delete) %>
+        :class => 'dummy') %>
+      <%= link_to image_tag('cancel.png', plugin: 'redmine_attach_by_url'), '#',
+                  class: 'button-cancel',
+                  title: l(:button_attachment_cancel) %>
+      <%= text_field_tag 'attachments_by_url[][description]', '',
+                         id:          nil,
+                         class:       'description',
+                         placeholder: l(:label_optional_description),
+                         title:       l(:label_optional_description) %>
+      <%= link_to image_tag('delete.png'), '#',
+                  class: 'button-delete',
+                  title: l(:button_delete) %>
     </div>
   </div>
   <span class="add_attachment">
-    <%= link_to l(:label_add_another_file), '#', :class => 'add_attachment' %>
+    <%= link_to l(:label_add_another_file), '#', class: 'add_attachment' %>
   (<%= l(:label_max_size) %>: <%= number_to_human_size(Setting.attachment_max_size.to_i.kilobytes) %>)
   </span>
 </fieldset>

@@ -1,5 +1,4 @@
 class AttachmentsByUrlController < ApplicationController
-  unloadable
   before_filter :authorize_global
 
   def create

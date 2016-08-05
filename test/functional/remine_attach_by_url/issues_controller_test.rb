@@ -26,24 +26,24 @@ class RedmineAttachByUrl::IssuesControllerTest < ActionController::TestCase
   def test_save_attachment_by_url
     set_tmp_attachments_directory
     attach = Attachment.new(
-        :file => uploaded_test_file('testfile.txt', 'text/plain'),
-        :author => User.find(1)
+      file:   uploaded_test_file('testfile.txt', 'text/plain'),
+      author: User.find(1)
     )
     attach_by_url = AttachmentByUrl.create!(
-        :url => 'http://example.com/testfile.txt',
-        :author => attach.author,
-        :state => AttachmentByUrl::COMPLETED,
-        :attachment => attach
+      url:        'http://example.com/testfile.txt',
+      author:     attach.author,
+      state:      AttachmentByUrl::COMPLETED,
+      attachment: attach
     )
 
     assert_difference 'Issue.count' do
-      post :create, :project_id => 1,
-           :issue => { :tracker_id => '1', :subject => 'With attachment by url' },
-           :attachments_by_url => [{ 'id' => attach_by_url.id, 'description' => 'test file' }]
+      post :create, project_id: 1,
+           issue:               { tracker_id: '1', subject: 'With attachment by url' },
+           attachments_by_url:  [{ id: attach_by_url.id, description: 'test file' }]
     end
 
-    issue = Issue.first(:order => 'id DESC')
-    attachment = Attachment.first(:order => 'id DESC')
+    issue = Issue.last
+    attachment = Attachment.last
 
     assert_equal issue, attachment.container
     assert_equal 1, attachment.author_id

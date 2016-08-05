@@ -4,7 +4,7 @@ ru:
 
   message_download_success: "Загрузка %{url} завершена."
   message_download_failed: "Не удалось загрузить %{url}"
-  message_invalid_url: "неверный! Пример правильного URL: http(s)://example.com/file.png"
+  message_invalid_url: "неверный! Пример правильного URL: http://example.com/file.png"
   message_download_was_interrupted: "Загрузка была прервана"
 
   button_attachment_download: "Загрузить"

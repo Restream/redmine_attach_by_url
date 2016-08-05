@@ -28,31 +28,32 @@ module RedmineAttachByUrl
       attach.save!
       uri = URI.parse(attach.url)
       file = uri.open(
-        :content_length_proc => lambda { |total|
+        content_length_proc: lambda { |total|
           check_size!(total)
           attach.total_bytes = total
         },
-        :progress_proc => lambda { |downloaded_bytes|
+        progress_proc:       lambda { |downloaded_bytes|
           check_size!(downloaded_bytes)
           attach.complete_bytes = downloaded_bytes
           if Time.now - attach.updated_at > UPDATE_INTERVAL
 
             # check the state is still IN_PROGRESS
-            canceled_attach = AttachmentByUrl.first(:conditions =>
-                ["id = ? and state <> ?", attach.id, AttachmentByUrl::IN_PROGRESS])
-            raise StateChangedError.new() if canceled_attach
+            canceled_attach = AttachmentByUrl.where(
+              'id = ? and state <> ?', attach.id, AttachmentByUrl::IN_PROGRESS
+            ).first
+            raise StateChangedError if canceled_attach
 
             attach.save!
           end
         },
-        :allow_redirections => :all
+        allow_redirections: :all
       )
       file.extend OriginalFilename
       file.original_filename = guess_file_name(file.content_type)
-      a = Attachment.create(:file => file, :author => attach.author)
+      a = Attachment.create(file: file, author: attach.author)
       if (a.new_record?)
         attach.state = AttachmentByUrl::FAILED
-        attach.state_text = a.errors.full_messages.join("; ")
+        attach.state_text = a.errors.full_messages.join('; ')
       else
         attach.state = AttachmentByUrl::COMPLETED
         attach.attachment = a
@@ -81,17 +82,17 @@ module RedmineAttachByUrl
       if size_in_bytes > Setting.attachment_max_size.to_i.kilobytes
         raise FileTooBigError.new(I18n.t(
           :error_attachment_too_big,
-          :max_size => Setting.attachment_max_size.to_i.kilobytes))
+          max_size: Setting.attachment_max_size.to_i.kilobytes))
       end
     end
 
     def guess_extension(content_type)
-      Redmine::MimeType::MIME_TYPES[content_type].to_s.split(',').first || "unknown"
+      Redmine::MimeType::MIME_TYPES[content_type].to_s.split(',').first || 'unknown'
     end
 
     def guess_file_name(content_type)
       uri = URI.parse(attach.url)
-      base_name = (m = /\/?([^\/]+)$/.match(uri.path)) ? m[1] : "noname"
+      base_name = (m = /\/?([^\/]+)$/.match(uri.path)) ? m[1] : 'noname'
       /\./ =~ base_name ? base_name : "#{base_name}.#{guess_extension(content_type)}"
     end
 

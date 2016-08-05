@@ -4,7 +4,7 @@ en:
 
   message_download_success: "Download from %{url} is complete."
   message_download_failed: "Download from %{url} failed."
-  message_invalid_url: "invalid! Example of a valid URL: http(s)://example.com/file.png"
+  message_invalid_url: "invalid! Example of a valid URL: http://example.com/file.png"
   message_download_was_interrupted: "Download was interrupted."
 
   button_attachment_download: "Download"

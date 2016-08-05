@@ -1,4 +1,4 @@
-module AttachByUrl
+module RedmineAttachByUrl
   class Hooks < Redmine::Hook::Listener
     def controller_issues_edit_before_save(context)
       issue = context[:issue]

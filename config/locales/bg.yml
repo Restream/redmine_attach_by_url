@@ -4,7 +4,7 @@ bg:
 
   message_download_success: "Прикачването от %{url} е завършена."
   message_download_failed: "Прикачването от %{url} е неуспешно"
-  message_invalid_url: "е неправилен! Пример за правилен URL: http(s)://example.com/file.png"
+  message_invalid_url: "е неправилен! Пример за правилен URL: http://example.com/file.png"
   message_download_was_interrupted: "Прикачването беше прекратено"
 
   button_attachment_download: "Прикачване"
