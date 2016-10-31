@@ -17,15 +17,15 @@ class RedmineAttachByUrl::IssuesControllerTest < ActionController::TestCase
            :workflows
 
   def setup
-    @controller = IssuesController.new
-    @request    = ActionController::TestRequest.new
-    @response   = ActionController::TestResponse.new
+    @controller                = IssuesController.new
+    @request                   = ActionController::TestRequest.new
+    @response                  = ActionController::TestResponse.new
     @request.session[:user_id] = 1 # admin
   end
 
   def test_save_attachment_by_url
     set_tmp_attachments_directory
-    attach = Attachment.new(
+    attach        = Attachment.new(
       file:   uploaded_test_file('testfile.txt', 'text/plain'),
       author: User.find(1)
     )
@@ -42,7 +42,7 @@ class RedmineAttachByUrl::IssuesControllerTest < ActionController::TestCase
            attachments_by_url:  [{ id: attach_by_url.id, description: 'test file' }]
     end
 
-    issue = Issue.last
+    issue      = Issue.last
     attachment = Attachment.last
 
     assert_equal issue, attachment.container

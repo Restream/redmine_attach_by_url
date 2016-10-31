@@ -24,8 +24,8 @@ module RedmineAttachByUrl
     def translated_state_text
       return @attach.errors.full_messages.join('; ') if @attach.errors.any?
       @attach.state_text.blank? ?
-          I18n.t(@attach.state, scope: 'message_attachment_by_url_state') :
-          @attach.state_text
+        I18n.t(@attach.state, scope: 'message_attachment_by_url_state') :
+        @attach.state_text
     end
   end
 end

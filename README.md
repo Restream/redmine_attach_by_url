@@ -9,7 +9,7 @@ This plugin adds **Attachments by URL** block to the issue form and enables you 
 
 ## Compatibility
 
-This plugin version is compatible with Redmine 2.3 and newer.
+This plugin version is compatible with Redmine 3.x.
 
 ## Installation
 

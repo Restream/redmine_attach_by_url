@@ -1,6 +1,6 @@
 class CreateAttachmentsByUrl < ActiveRecord::Migration
   def self.up
-    create_table :attachments_by_url, :force => true do |t|
+    create_table :attachments_by_url, force: true do |t|
       t.column :url, :string
       t.column :state, :string
       t.column :state_text, :string

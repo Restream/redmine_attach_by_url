@@ -9,7 +9,7 @@ module RedmineAttachByUrl
           a_by_url = AttachmentByUrl.find_by(id: attachment['id'].to_i, state: AttachmentByUrl::COMPLETED)
 
           if a_by_url && (a = a_by_url.attachment)
-            a.filename = attachment['filename'] unless attachment['filename'].blank?
+            a.filename    = attachment['filename'] unless attachment['filename'].blank?
             a.description = attachment['description'].to_s.strip
             saved_attachments << a
           end

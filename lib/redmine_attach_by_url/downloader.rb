@@ -26,7 +26,7 @@ module RedmineAttachByUrl
       return unless attach && attach.state == AttachmentByUrl::QUEUED
       attach.state = AttachmentByUrl::IN_PROGRESS
       attach.save!
-      uri = URI.parse(attach.url)
+      uri  = URI.parse(attach.url)
       file = uri.open(
         content_length_proc: lambda { |total|
           check_size!(total)
@@ -46,16 +46,16 @@ module RedmineAttachByUrl
             attach.save!
           end
         },
-        allow_redirections: :all
+        allow_redirections:  :all
       )
       file.extend OriginalFilename
       file.original_filename = guess_file_name(file.content_type)
-      a = Attachment.create(file: file, author: attach.author)
+      a                      = Attachment.create(file: file, author: attach.author)
       if (a.new_record?)
-        attach.state = AttachmentByUrl::FAILED
+        attach.state      = AttachmentByUrl::FAILED
         attach.state_text = a.errors.full_messages.join('; ')
       else
-        attach.state = AttachmentByUrl::COMPLETED
+        attach.state      = AttachmentByUrl::COMPLETED
         attach.attachment = a
       end
 
@@ -64,7 +64,7 @@ module RedmineAttachByUrl
       # just stop downloading
       raise
     rescue Exception => error
-      attach.state = AttachmentByUrl::FAILED
+      attach.state      = AttachmentByUrl::FAILED
       attach.state_text = error.message
       attach.save!
     end
@@ -91,7 +91,7 @@ module RedmineAttachByUrl
     end
 
     def guess_file_name(content_type)
-      uri = URI.parse(attach.url)
+      uri       = URI.parse(attach.url)
       base_name = (m = /\/?([^\/]+)$/.match(uri.path)) ? m[1] : 'noname'
       /\./ =~ base_name ? base_name : "#{base_name}.#{guess_extension(content_type)}"
     end

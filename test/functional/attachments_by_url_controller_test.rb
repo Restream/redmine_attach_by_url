@@ -15,13 +15,13 @@ class AttachmentsByUrlControllerTest < ActionController::TestCase
   def setup
     @url = 'http://example.com/pic.png'
 
-    User.current = User.find(2)
+    User.current               = User.find(2)
     @request.session[:user_id] = 2
 
     # switch off delayed_job
     RedmineAttachByUrl::Downloader.class_eval "def self.delay() return self end"
     RedmineAttachByUrl::Downloader.stubs(:download).returns(nil)
-    @attach_by_url = RedmineAttachByUrl::DownloadService.download_start(@url, User.current)
+    @attach_by_url       = RedmineAttachByUrl::DownloadService.download_start(@url, User.current)
     @attach_by_url.state = AttachmentByUrl::IN_PROGRESS
     @attach_by_url.save!
   end
